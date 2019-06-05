@@ -1,0 +1,521 @@
+<!--
+    可观看的信息有
+    创建时间
+    创建时的IP
+    上一次登录的IP
+-->
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- 引入Bootstrap -->
+    <link href="__STATIC__/bootstrap4.1.0/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- 引入字体文件 -->
+    <link href="__STATIC__/res/iconfont/iconfont.css" rel="stylesheet">
+    <style>
+        body{
+            padding:0;
+            margin:0;
+        }
+        *{
+            text-decoration: none;
+        }
+        .my_box{
+            width:75px;
+            height:75px;
+            overflow: hidden;
+            border-radius:15px;
+            border:1px solid #ccc;
+            position:fixed;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+            transition: .6s;
+            cursor: pointer;
+        }
+        .my_box:hover{
+            animation:my_box 0.5s forwards;
+            transition: .5s;
+        }
+        @keyframes my_box{
+            form{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+        .my_box img{
+            width:100%;
+        }
+        .xiantiao{
+            display: block;
+            width:86%;
+            height:1px;
+            border-bottom: 1px solid #ccc;
+            margin:0 auto;
+        }
+
+        .pic_box{
+            z-index: 100;
+            width:609px;
+            min-height:673px;
+            height:auto;
+            border-radius:8px;
+            background: #fff;
+            border:1px solid #ccc;
+            position: fixed;
+            top:-1000px;
+            left:0;
+            right:0;
+            margin:0 auto;
+        }
+        .header{
+            height:45px;
+            text-align: center;
+        }
+        .close{
+            color:#000;
+            font-size: 21px;
+            line-height: 1;
+            text-shadow: 0 1px 0 #fff;
+            opacity: .2;
+            position:absolute;
+            right:8px;
+            top:2px;
+            cursor: pointer;
+        }
+        .pic_box ul{
+            padding: 0;
+            margin:0;
+            width:96%;
+            height:511px;
+            margin:10px auto;
+        }
+        .pic_box ul li{
+            display: block;
+            list-style: none;
+            width:61px;
+            height:61px;
+            float: left;
+            border-radius: 15%;
+            border:1px solid #ccc;
+            margin:5px 5px;
+            transition: .6s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .pic_box ul li:hover{
+            transform: scale(1.15);
+            transition: .5s;
+        }
+        .pic_box ul li img{
+            width:100%;
+        }
+        .bt_box{
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+        .bt_box .gb{
+            display:inline-block;
+            width:120px;
+            height:35px;
+            border-radius: 8px;
+            background:#f3f3f3;
+            color:#444;
+            line-height: 35px;
+        }
+        .bt_box .queren{
+            display: inline-block;
+            width:120px;
+            height:35px;
+            border-radius: 8px;
+            background:#4B8BF5;
+            color:#fff;
+            line-height: 35px;
+        }
+        a{
+            color: #212529;
+        }
+    </style>
+    <style type="text/css">
+        #preview {
+            display: inline-block;
+            width: 15rem;
+            height: 15rem;
+            position: relative;
+            background-image: url(__STATIC__/picture/tianjia.png);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        #file {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+            z-index: 5;
+        }
+    </style>
+    <style>
+        .color-blue{
+            color: #2980ff !important
+        }
+        .pl-4\.5{
+            padding-left: 2.2rem;
+        }
+        .list-nav .color-blue:before {
+            position: absolute;
+            content: "";
+            left: 0;
+            width: 4px;
+            height: 28px;
+            top: 50%;
+            margin: -14px 0 0;
+            background: #2980ff;
+        }
+    </style>
+</head>
+<body>
+<div class="container  mx-auto border" style="height: 650px;margin-top: 30px;padding: 0px;">
+    <div class="mod-setting h-100">
+        <div class="setting-title w-100 bg-light text-center border-bottom" style="height: 46px;font-size: 22px">个人设置</div>
+        <div class="setting-content w-100  row" style="padding: 0px;margin: 0px;height:603px">
+            <div class="setting-menu col-3 h-100 border-right bg-light">
+                <div class="list-group list-group-flush list-nav">
+                    <span class="navbar-text">个人资料</span>
+                    <div class="dropdown-divider ml-3 mr-3"></div>
+                    <a class="nav-link list-group-item list-group-item-action bg-light border-0 pl-4.5 color-blue font-weight-bold" data-toggle="tab" href="#menu1">用户信息</a>
+                    <a class="nav-link list-group-item list-group-item-action bg-light border-0 pl-4.5" data-toggle="tab" href="#menu2">账户信息</a>
+                    <a class="nav-link list-group-item list-group-item-action bg-light border-0 pl-4.5" data-toggle="tab" href="#menu3">头像设置</a>
+                    <a class="nav-link list-group-item list-group-item-action bg-light border-0 pl-4.5" data-toggle="tab" href="#menu4">登录密码</a>
+                    <span class="navbar-text">账户隐私</span>
+                    <div class="dropdown-divider ml-3 mr-3"></div>
+                    <a class="nav-link list-group-item list-group-item-action bg-light border-0 pl-4.5" data-toggle="tab" href="#menu5">账户安全</a>
+                </div>
+            </div>
+            <div class="setting-detail col-9 h-100 ">
+                <div class="tab-content">
+                    <div id="menu1" class="container tab-pane active "><br>
+                        <div class="row h3 pb-2 border-bottom">基本资料</div>
+                        <form id="basicsForm" method="post" style="width: 40%">
+                            <div class="form-group">
+                                <label for="name">昵称:</label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="输入您的昵称" value="{$Think.session.user_info.real_name}">
+                            </div>
+                            <div class="radio">
+                                <label>性别:</label>
+                                {eq name="$Think.session.user_info.user_sex" value="1"}
+                                <label><input type="radio" name="sex" value="1" checked title="男">男</label>
+                                <label><input type="radio" name="sex" value="0" title="女">女</label>
+                                {else /}
+                                <label><input type="radio" name="sex" value="1" title="男">男</label>
+                                <label><input type="radio" name="sex" value="0" checked title="女">女</label>
+                                {/eq}
+                            </div>
+                            <div class="form-group">
+                                <label for="city">所在地:</label>
+                                <input type="text" name="city" class="form-control" id="city" placeholder="输入您的所在地" value="{$Think.session.user_info.user_city}">
+                            </div>
+                            <div class="form-group">
+                                <label for="age">年龄:</label>
+                                <input type="text" name="age" class="form-control" id="age" placeholder="输入您的年龄" value="{$Think.session.user_info.user_age}">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">个人简介:</label>
+                                <textarea class="form-control" name="comment" rows="4" id="comment">{$Think.session.user_info.introduction}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" id="menu1Button" class="btn btn-primary" style="width: 100px;margin-left: 30%">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="menu2" class="container tab-pane fade"><br>
+                        <div class="row h3 pb-2 border-bottom">详细资料</div>
+                        <form id="detailedForm" method="post" style="width: 40%">
+                            <div class="form-group">
+                                <label for="email">绑定邮箱:</label>
+                                <input type="text" class="form-control" disabled id="email" placeholder="输入您的新邮箱" value="{$Think.session.user_info.email}">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">绑定手机号:</label>
+                                <input type="text" class="form-control" id="phone" placeholder="输入您的新号码" value="{$Think.session.user_info.telephone}">
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label sr-only">Verify</label>
+                                <div class="col-7">
+                                    <input type="text" id="reg_verify" class="form-control" name="verify" placeholder="请输入验证码"/>
+                                </div>
+                                <div class="col-5">
+                                    <input type="button" id="reg_email_btn" class="btn btn-primary" value="获取验证码" disabled onclick="interval(this)" />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100px;margin-left: 30%">提交</button>
+                        </form>
+                    </div>
+                    <div id="menu3" class="container tab-pane fade"><br>
+                        <div class="row h3 pb-2 border-bottom">头像设置</div>
+                        <div class="head-main row" style="height: 300px">
+                            <div class="head-left col-8 border-right">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#img1">自定义头像</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#img2">热门推荐头像</a>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane container active" id="img1">
+                                        <div id="preview">
+                                            <input type="file" accept="image/*" id="file" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane container" id="img2">
+                                        <div class="wrap">
+                                            <a class="t"></a>
+                                            <div class="my_box">
+                                                <form id="uploadForm">
+                                                    <input class="jide" name="imgsrc" type="hidden" value="" />
+                                                    <img src="{$Think.session.user_info.picture}" class="my_pic img-thumbnail"  style="width: 75px;height: 75px"/>
+                                                </form>
+                                            </div>
+                                            <div class="pic_box" id="pic_box">
+                                                <div class="header">
+                                                    <p>设置头像</p>
+                                                    <span class="close">x</span>
+                                                </div>
+                                                <span class="xiantiao"></span>
+                                                <ul>
+                                                    <li><img src="__STATIC__/picture/0.png"/></li>
+                                                    <li><img src="__STATIC__/picture/1.png"/></li>
+                                                    <li><img src="__STATIC__/picture/2.png"/></li>
+                                                    <li><img src="__STATIC__/picture/3.png"/></li>
+                                                    <li><img src="__STATIC__/picture/4.png"/></li>
+                                                    <li><img src="__STATIC__/picture/5.png"/></li>
+                                                    <li><img src="__STATIC__/picture/6.png"/></li>
+                                                    <li><img src="__STATIC__/picture/7.png"/></li>
+                                                    <li><img src="__STATIC__/picture/0.png"/></li>
+                                                    <li><img src="__STATIC__/picture/1.png"/></li>
+                                                    <li><img src="__STATIC__/picture/2.png"/></li>
+                                                    <li><img src="__STATIC__/picture/3.png"/></li>
+                                                    <li><img src="__STATIC__/picture/4.png"/></li>
+                                                    <li><img src="__STATIC__/picture/5.png"/></li>
+                                                    <li><img src="__STATIC__/picture/6.png"/></li>
+                                                    <li><img src="__STATIC__/picture/7.png"/></li>
+                                                    <li><img src="__STATIC__/picture/0.png"/></li>
+                                                    <li><img src="__STATIC__/picture/1.png"/></li>
+                                                    <li><img src="__STATIC__/picture/2.png"/></li>
+                                                    <li><img src="__STATIC__/picture/3.png"/></li>
+                                                    <li><img src="__STATIC__/picture/4.png"/></li>
+                                                    <li><img src="__STATIC__/picture/5.png"/></li>
+                                                    <li><img src="__STATIC__/picture/6.png"/></li>
+                                                    <li><img src="__STATIC__/picture/7.png"/></li>
+                                                    <li><img src="__STATIC__/picture/0.png"/></li>
+                                                    <li><img src="__STATIC__/picture/1.png"/></li>
+                                                    <li><img src="__STATIC__/picture/2.png"/></li>
+                                                    <li><img src="__STATIC__/picture/3.png"/></li>
+                                                    <li><img src="__STATIC__/picture/4.png"/></li>
+                                                    <li><img src="__STATIC__/picture/5.png"/></li>
+                                                    <li><img src="__STATIC__/picture/6.png"/></li>
+                                                    <li><img src="__STATIC__/picture/7.png"/></li>
+                                                </ul>
+                                                <div class="bt_box">
+                                                    <a class="gb" href="javascript:">关闭</a>
+                                                    <a class="queren" href="javascript:">选择</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="head-right col-4 ">
+                                <div class="pl-3 mx-auto mt-3" style="width: 180px;height: 300px">
+                                    <div class="h3">头像预览</div>
+                                    <img id="bigthumb" src="{$Think.session.user_info.picture}" class="img-thumbnail mt-3 ml-0 row my_pic" style="width: 100px;height: 100px">
+                                    <img id="smallthumb" src="{$Think.session.user_info.picture}" class="img-thumbnail mt-3 ml-0 row my_pic" style="width: 55px;height: 55px">
+                                    <a href="#" id="confirm" data-headchoose="none" class="btn btn-info" role="button" style="position: absolute;bottom: 0px;">确认</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu4" class="container tab-pane fade"><br>
+                        <div class="row h3 pb-2 border-bottom">登录密码</div>
+                        <form id="passwordForm" method="post" style="width: 40%">
+                            <div class="form-group">
+                                <label for="oldpassword">旧密码:</label>
+                                <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="输入您目前的密码">
+                            </div>
+                            <div class="form-group">
+                                <label for="againpassword">新密码:</label>
+                                <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="输入您的新密码">
+                            </div>
+                            <div class="form-group">
+                                <label for="newpassword">确认密码:</label>
+                                <input type="password" class="form-control" name="againpassword" id="againpassword" placeholder="再次输入您的新密码">
+                            </div>
+                            <button type="submit" id="menu4Button" class="btn btn-primary" style="width: 100px;margin-left: 30%">提交</button>
+                        </form>
+                    </div>
+                    <div id="menu5" class="container tab-pane fade"><br>
+                        <div class="row h3 pb-2 border-bottom">账户安全</div>
+
+                        <table class="table table-gray table-bordered table-hover mt-4">
+                            <tbody>
+                            <thead>
+                            <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>上一次登录IP</td>
+                                <td>127.0.0.1</td>
+                            </tr>
+                            <tr>
+                                <td>上一次登陆时间</td>
+                                <td>2019年5月1日</td>
+                            <tr>
+                                <td>上一次修改时间</td>
+                                <td>{$Think.session.user_info.user_info_modify}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a href="http://cloud2.test/home" class="btn btn-info" role="button" style="position: absolute;right: 20px;bottom: 20px">返回</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="__STATIC__/jquery/jquery-3.4.0.min.js"></script>
+<script type="text/javascript" src="__STATIC__/bootstrap4.1.0/js/bootstrap.bundle.min.js"></script>
+<!-- 加载 BootstrapValidator 的所有 JavaScript 插件。-->
+<script type="text/javascript" src="__STATIC__/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
+<!-- 加载layer插件。-->
+<script type="text/javascript" src="__STATIC__/layer/layer.js"></script>
+<!--加载公共js模块-->
+<script type="text/javascript" src="__STATIC__/res/js/common.js"></script>
+<!--加载表单验证的js模块-->
+<script type="text/javascript" src="__STATIC__/res/js/formvalidate.js"></script>
+<script type="text/javascript">
+    $(".close,.gb").click(function(){
+        $(".pic_box").animate({
+            'top':'-1000px'
+        },500);
+    }),
+        $(".my_box").click(function(){
+            $(".pic_box").animate({
+                'top':'15px',
+            },300);
+        }),
+        $(".queren").click(function(){
+            var src = $(".jide").val();
+            //$.ajax与index.php交互,在php中判断文件,保存至数据库即可
+
+            /*if(src != ""){
+                $.ajax({
+                    url:"index.php",
+                    type:'post',
+                    data:{'imgsrc':src},
+                    success:function(data){
+                        $(".my_pic").attr('src',src);
+                        $(".pic_box").animate({
+                            'top':'-1000px'
+                        },500);
+                        console.log(data);
+                    }
+                })
+            }else{
+                return false;
+            }*/
+
+            /**
+             * 后台我是用Thinkphp框架写的代码如下
+             $show=M('user')->getByusername($_SESSION['_username']);
+             if(!empty($_POST['imgsrc'])){
+			$_POST['id']=$show['id'];
+			$x=$info->create();
+			$res=$info->save();
+			if($res){
+				echo json_encode($_POST['imgsrc']);
+			}
+		}
+             */
+
+
+            //效果展示,在服务器中把这一段删除,用上面那一段
+            if(src != ""){
+                $(".my_pic").attr('src',src);
+                $(".pic_box").animate({
+                    'top':'-1000px'
+                },500);
+                $('#confirm').attr('data-headchoose','default');
+            }else{
+                return false;
+            }
+
+        });
+    var $box = document.getElementById('pic_box');
+    var $li = $box.getElementsByTagName('li');
+    var index = 0;
+    for(var i=0;i<$li.length;i++){
+        $li[i].index=i;
+        $li[i].onclick=function(){
+            $li[index].style.borderRadius="15%";
+            this.style.borderRadius="50%";
+            index = this.index;
+        }
+    }
+    $(".pic_box li img").click(function(){
+        var src=$(this).attr("src");
+        $(".jide").val(src);
+    })
+</script>
+<script type="text/javascript">
+    var preview = document.querySelector('#preview');
+    var eleFile = document.querySelector('#file');
+    var bigthumb = document.querySelector('#bigthumb');
+    var smallthumb = document.querySelector('#smallthumb');
+    eleFile.addEventListener('change', function() {
+        var file = this.files[0];
+        // 确认选择的文件是图片
+        if(file.type.indexOf("image") == 0) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(e) {
+                // 图片base64化
+                var newUrl = this.result;
+                preview.style.backgroundImage = 'url(' + newUrl + ')';
+                bigthumb.src = newUrl;
+                smallthumb.src = newUrl;
+                $('#confirm').attr('data-headchoose','diy');
+            };
+        }
+    });
+</script>
+<script>
+    $(".list-group>a").each(function (index) {
+        $(this).click(function () {
+            $(this).siblings().removeClass("color-blue");
+            $(this).siblings().removeClass("font-weight-bold");
+            $(this).addClass("color-blue");
+            $(this).addClass("font-weight-bold");
+        });
+    });
+</script>
+</body>
+</html>

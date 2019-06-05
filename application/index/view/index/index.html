@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>首页-交理云</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="__STATIC__/bootstrap3.3.7/css/bootstrap.min.css">
+    <!-- BootstrapValidator -->
+    <link rel="stylesheet" href="__STATIC__/bootstrapvalidator/dist/css/bootstrapValidator.min.css"/>
+    <!--公共css文件-->
+    <link rel="stylesheet" href="__STATIC__/res/css/common.css">
+    <!--页面css文件-->
+    <link rel="stylesheet" href="__STATIC__/res/css/index/index.css">
+</head>
+<body>
+
+<!--页面背景视频-->
+<video autoplay muted loop="loop" id="video" class="video">
+    <source src="__STATIC__/res/video/login_background.webm">
+</video>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="left col-md-6">
+            <div class="title">
+                <span class="f9 select">交 理 云</span><br />
+                <span class="f4 letter-spacing5 select">云你所想</span>
+            </div>
+        </div>
+        <div class="right col-md-6">
+            <div class="content">
+                <div class="header">
+                    <ul class="nav nav-tabs nav-justified" role="tablist" id="select">
+                        <li role="presentation"><a href="#email" aria-controls="email" role="tab" data-toggle="tab">邮箱登录</a></li>
+                        <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">账号登录</a></li>
+                        <li role="presentation"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">注册</a></li>
+                    </ul>
+                </div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!--邮箱登录-->
+                    <div role="tabpanel" class="tab-pane" id="email">
+                        <div class="email">
+                            <form id="emailForm" method="post" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label sr-only">Email</label>
+                                    <div class="col-lg-12">
+                                        <input type="text" id="login_email" class="form-control" name="email" placeholder="邮箱"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label sr-only">Verify</label>
+                                    <div class="col-lg-7">
+                                        <input type="text" id="login_email_verify" class="form-control" name="verify" placeholder="验证码"/>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input type="button" id="login_email_btn" class="btn btn-primary" value="获取验证码" disabled onclick="interval(this)" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn btn-primary btn-block">登录</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--账号登录-->
+                    <div role="tabpanel" class="tab-pane active" id="login">
+                        <div class="login">
+                            <div class="form">
+                                <div class="mask"><span>需要同意交理云协议才能登陆</span></div>
+                                <form id="loginForm" method="post" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label sr-only">Account</label>
+                                        <div class="col-lg-12">
+                                            <input type="text" id="login_account" class="form-control" name="account" placeholder="账号"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label sr-only">Password</label>
+                                        <div class="col-lg-12">
+                                            <input type="password" id="login_password" class="form-control" name="password" placeholder="密码"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label sr-only">Verify</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="login_verify" class="form-control" name="verify" placeholder="验证码"/>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <img id="verify_img" src="{:captcha_src()}" alt="captcha" style="display: block;width: 100%;height: 32px;" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-primary btn-block">登录</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="f15 t_align_c">
+                                <span><a href="javascript:;" onclick="server(this)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-agree" id="server"></use></svg></a> 同意《<a href="server" target="_blank">交理云服务协议</a>》</span>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div class="footer_left"><a href="javascript: ;" onclick="remember(this)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-disagree" id="remember"></use></svg> 下次自动登录</a></div>
+                            <div class="footer_right"><a href="forget" target="_blank">忘记密码？</a></div>
+                        </div>
+                    </div>
+                    <!--注册-->
+                    <div role="tabpanel" class="tab-pane" id="register">
+                        <div class="register">
+                            <form id="registerForm" method="post" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="control-label sr-only">Account</label>
+                                    <div class="col-lg-12">
+                                        <input type="text" id="reg_account" class="form-control" name="account" placeholder="请输入账号（6-30位）"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label sr-only">Password1</label>
+                                    <div class="col-lg-12">
+                                        <input type="password" id="reg_password1" class="form-control" name="password1" placeholder="请输入密码"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label sr-only">Password2</label>
+                                    <div class="col-lg-12">
+                                        <input type="password" id="reg_password2" class="form-control" name="password2" placeholder="请再次输入密码"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label sr-only">Email</label>
+                                    <div class="col-lg-12">
+                                        <input type="text" id="reg_email" class="form-control" name="email" placeholder="请输入邮箱地址"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label sr-only">Verify</label>
+                                    <div class="col-lg-7">
+                                        <input type="text" id="reg_verify" class="form-control" name="verify" placeholder="请输入验证码"/>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input type="button" id="reg_email_btn" class="btn btn-primary" value="获取验证码" disabled onclick="interval(this)" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn btn-primary btn-block">注册</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="__STATIC__/jquery/jquery-3.4.0.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。 -->
+<script src="__STATIC__/bootstrap3.3.7/js/bootstrap.min.js"></script>
+<!-- 加载 BootstrapValidator 的所有 JavaScript 插件。-->
+<script type="text/javascript" src="__STATIC__/bootstrapvalidator/dist/js/bootstrapValidator.min.js"></script>
+<!-- 加载layer插件。-->
+<script type="text/javascript" src="__STATIC__/layer/layer.js"></script>
+<!--加载公共js模块-->
+<script type="text/javascript" src="__STATIC__/res/js/common.js"></script>
+<!--加载iconfont模块-->
+<script type="text/javascript" src="__STATIC__/res/js/iconfont.js"></script>
+<!--加载表单验证的js模块-->
+<script type="text/javascript" src="__STATIC__/res/js/formvalidate.js"></script>
+<!--加载发送邮箱验证码的js模块-->
+<script type="text/javascript" src="__STATIC__/res/js/sendemail.js"></script>
+</body>
+</html>

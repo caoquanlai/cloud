@@ -1,0 +1,64 @@
+{extend name='public/base' /}
+
+{block name='seo' /}
+<title>{$title|default='云你所想'}</title>
+{/block}
+
+
+{block name='content' /}
+<div id="content" class="container-fluid">
+    <nav class="navbar navbar-expand-sm  navbar-light">
+        <span class="font-weight-bold" style="color: #212529">视频</span>
+    </nav>
+    <table class="table table-hover" id="table">
+        <caption>共x项</caption>
+        <thead>
+        <tr>
+            <th id="numcheckbox" style="width: 6%" ><span class="iconfont icon-duoxuankuang1 num-check" data-ischeck=""></span></th>
+            <th scope="col" class="sortth" style="max-width: 40%" type="string">名称</th>
+            <th scope="col" class="sortth" style="width: 30%" type="time">创建时间</th>
+            <th scope="col" class="sortth" style="width: 24%" type="size">大小</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <!--循环显示文件-->
+        {volist name="files" id="f"}
+        <tr class="tr-file" data-userFileId="{$f.user_file_id}">
+            <td>
+                <div></div>
+                {switch name="$f.file_type"}
+                {case value="gif|png|jpg|bmp"}
+                {if condition="array_key_exists('thumb_info', $f)"}
+                <img src="{$f.thumb_info.thumb_path}" class="img-thumbnail" style="width: 40px;height: 40px;padding: 0.1rem;" alt="">
+                {else /}
+                <span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>
+                {/if}
+                {/case}
+                {case value="txt|wps|xsl|ppt|pdf|html|doc"}<span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>{/case}
+                {case value="tar|zip|rar|7z"}<span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>{/case}
+                {case value="tif|rp|swf|svg|psd|exe|eps|avi|ai"}<span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>{/case}
+                {case value="mp3|mp4|mov|flv"}<span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>{/case}
+                {default /}<span class="icon iconfont icon-tubiao-unknown color-sblue file-icon-size"></span>
+                {/switch}
+                <a href="javascript:void(0)" class="" data-fileid="{$f.file_id}" title={$f.file_name}><span>{$f.file_name}</span></a>
+            </td>
+            <td>{$f.user_file_create}</td>
+            <td data-size="{$f.size}">{$f.sizeFormat}</td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+</div>
+<!-- /#page-content-wrapper -->
+</div>
+{/block}
+
+
+
+{block name='js'}
+<!--/请在上方写此页面业务相关的脚本-->
+{/block}
+</body>
+</html>

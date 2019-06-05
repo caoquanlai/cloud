@@ -1,0 +1,48 @@
+<!--文件上传展示界面-->
+<form id="form" method="post" style="display: none;">
+    <input type="file" class="btn btn-primary" name="file" id="file" multiple>
+</form>
+
+<div class="upload_view" id="upload_view" style="display: none;">
+    <div class="upload_view_header" id="upload_view_header">
+        <div style="display: inline-block">文件上传</div>
+        <div style="display:inline-block;float: right">
+            <a href="javascript:;"><svg class="c_icon" aria-hidden="true"><use id="suoxiao" xlink:href="#icon-suoxiao"></use></svg></a>
+            <a href="javascript:;"><svg class="c_icon" aria-hidden="true"><use id="cha" xlink:href="#icon-cha"></use></svg></a>
+        </div>
+    </div>
+    <div class="upload_view_body" id="upload_view_body">
+        <table class="table table-striped" id="upload_table">
+            <thead>
+            <tr>
+                <td>文件名</td>
+                <td>大小</td>
+                <td>上传目录</td>
+                <td>进度</td>
+            </tr>
+            </thead>
+            <tbody>
+            <!--<tr>-->
+            <!--<td>-->
+            <!--<div>-->
+            <!--<svg class="c_icon" aria-hidden="true"><use xlink:href="#icon-tubiao-jpg"></use></svg>-->
+            <!--<span style="display: inline-block;height:20px;vertical-align: top">1.jpg</span>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--<td>10GB</td>-->
+            <!--<td>我的文件</td>-->
+            <!--<td>-->
+            <!--&lt;!&ndash;<svg class="c_icon" aria-hidden="true" style="width: 1.1em"><use xlink:href="#icon-agree"></use></svg>&ndash;&gt;-->
+            <!--<div class="progress" style="margin-bottom: 0;">-->
+            <!--<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">-->
+            <!--60%-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--</tr>-->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--文件上传展示界面-->

@@ -1,0 +1,86 @@
+{extend name='public/base' /}
+
+{block name='seo' /}
+<title>{$title|default='云你所想'}</title>
+{/block}
+
+
+{block name='content' /}
+<div id="content" class="container-fluid">
+    <nav class="breadcrumb" id="breadcrumb" style="margin: 0px;background-color: white;">
+        {empty name="$breadcrumb"}
+            <span class="breadcrumb-item active" data-dirid="1">全部</span>
+        {else /}
+            <a class="breadcrumb-item loadDirectory" id="1" data-dirid="1" href="javascript:void(0)">全部</a>
+            {volist name="$breadcrumb" id="b"}
+            {if condition="$i eq count($breadcrumb)"}
+                <span class="breadcrumb-item active" id="{$b.directory_id}" data-dirid="{$b.directory_id}">{$b.directory_name}</span>
+            {else /}
+                <a class="breadcrumb-item loadDirectory" id="{$b.directory_id}" data-dirid="{$b.directory_id}" href="javascript:void(0)">{$b.directory_name}</a>
+            {/if}
+            {/volist}
+        {/empty}
+    </nav>
+    <table class="table table-hover" id="table">
+        <caption>共x项</caption>
+        <thead>
+        <tr>
+            <th id="numcheckbox" style="width: 6%" ><span class="iconfont icon-duoxuankuang1 num-check" data-ischeck=""></span></th>
+            <th scope="col" class="sortth" style="max-width: 40%" type="string">名称</th>
+            <th scope="col" class="sortth" style="width: 30%" type="time">创建时间</th>
+            <th scope="col" class="sortth" style="width: 24%" type="size">大小</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--循环显示目录-->
+        {volist name="$directory" id="dir"}
+        <tr class="tr-folder" data-directoryId="{$dir.directory_id}">
+            <td>
+                <div></div>
+                <span class="icon iconfont icon-wenjianjia color-sblue file-icon-size"></span>
+                <a href="javascript:void(0)" class="loadDirectory" id='{$dir.directory_id}' title={$dir.directory_name}><span>{$dir.directory_name}</span></a>
+            </td>
+            <td>{$dir.directory_create}</td>
+            <td data-size="{$dir.size}">{$dir.sizeFormat}</td>
+        </tr>
+        {/volist}
+        <!--循环显示文件-->
+        {volist name="$files" id="f"}
+        <tr class="tr-file" data-userFileId="{$f.user_file_id}">
+            <td>
+                <div></div>
+                {switch name="$f.file_type"}
+                    {case value="gif|png|jpg|bmp"}
+                        {if condition="array_key_exists('thumb_info', $f)"}
+                            <img src="{$f.thumb_info.thumb_path}" class="img-thumbnail" style="width: 40px;height: 40px;padding: 0.1rem;" alt="">
+                        {else /}
+                            <span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>
+                        {/if}
+                    {/case}
+                    {case value="txt|wps|xsl|ppt|pdf|html|doc"}<span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>{/case}
+                    {case value="tar|zip|rar|7z"}<span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>{/case}
+                    {case value="tif|rp|swf|svg|psd|exe|eps|avi|ai"}<span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>{/case}
+                    {case value="mp3|mp4|mov|flv"}<span class="icon iconfont icon-tubiao-{$f.file_type} color-sblue file-icon-size"></span>{/case}
+                    {default /}<span class="icon iconfont icon-tubiao-unknown color-sblue file-icon-size"></span>
+                {/switch}
+                <a href="javascript:void(0)" class="file" data-fileid="{$f.file_id}" title={$f.file_name}><span>{$f.file_name}</span></a>
+            </td>
+            <td>{$f.user_file_create}</td>
+            <td data-size="{$f.size}">{$f.sizeFormat}</td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+</div>
+<!-- /#page-content-wrapper -->
+</div>
+{/block}
+
+
+
+{block name='js'}
+<!--/请在上方写此页面业务相关的脚本-->
+{/block}
+</body>
+</html>

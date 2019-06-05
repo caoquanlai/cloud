@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="__STATIC__/bootstrap3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__STATIC__/bootstrap-fileinput/css/fileinput.min.css">
+    <link rel="stylesheet" href="__STATIC__/bootstrap-fileinput/themes/explorer-fa/theme.css">
+    <!--<style type="text/css">-->
+        <!--*{-->
+            <!--font-family: 'microsoft yahei';-->
+            <!--color: #4A4A4A;-->
+        <!--}-->
+        <!--.upload{-->
+            <!--width: 700px;-->
+            <!--padding: 20px;-->
+            <!--border: 1px dashed #ccc;-->
+            <!--margin: 100px auto;-->
+            <!--border-radius: 5px;-->
+        <!--}-->
+        <!--.uploadBox{-->
+            <!--width: 100%;-->
+            <!--height: 35px;-->
+            <!--/*background: #F0F0F0;*/-->
+            <!--position: relative;-->
+        <!--}-->
+        <!--.uploadBox input{-->
+            <!--width: 200px;-->
+            <!--height: 30px;-->
+            <!--background: red;-->
+            <!--position: absolute;-->
+            <!--top: 2px;-->
+            <!--left: 0;-->
+            <!--z-index: 201;-->
+            <!--opacity: 0;-->
+            <!--cursor: pointer;-->
+        <!--}-->
+        <!--.uploadBox .inputCover{-->
+            <!--width: 200px;-->
+            <!--height: 30px;-->
+            <!--position: absolute;-->
+            <!--top: 2px;-->
+            <!--left: 0;-->
+            <!--z-index: 200;-->
+            <!--text-align: center;-->
+            <!--line-height: 30px;-->
+            <!--font-size: 14px;-->
+            <!--border: 1px solid #009393;-->
+            <!--border-radius: 5px;-->
+            <!--cursor: pointer;-->
+        <!--}-->
+        <!--.uploadBox button.submit{-->
+            <!--width: 100px;-->
+            <!--height: 30px;-->
+            <!--position: absolute;-->
+            <!--left: 230px;-->
+            <!--top: 2px;-->
+            <!--border-radius: 5px;-->
+            <!--border: 1px solid #ccc;-->
+            <!--background: #F0F0F0;-->
+            <!--outline: none;-->
+            <!--cursor: pointer;-->
+        <!--}-->
+        <!--.uploadBox button.submit:hover{-->
+            <!--background: #E0E0E0;-->
+        <!--}-->
+        <!--.uploadBox button.upagain{-->
+            <!--width: 100px;-->
+            <!--height: 30px;-->
+            <!--position: absolute;-->
+            <!--left: 340px;-->
+            <!--top: 2px;-->
+            <!--display: none;-->
+            <!--border-radius: 5px;-->
+            <!--border: 1px solid #ccc;-->
+            <!--background: #F0F0F0;-->
+            <!--outline: none;-->
+            <!--cursor: pointer;-->
+        <!--}-->
+        <!--.uploadBox button.upagain:hover{-->
+            <!--background: #E0E0E0;-->
+        <!--}-->
+        <!--.processBar{-->
+            <!--display: inline-block;-->
+            <!--width: 0;-->
+            <!--height: 7px;-->
+            <!--position: absolute;-->
+            <!--left: 500px;-->
+            <!--top: 14px;-->
+            <!--background: #009393;-->
+        <!--}-->
+        <!--.processNum{-->
+            <!--position: absolute;-->
+            <!--left: 620px;-->
+            <!--color: #009393;-->
+            <!--font-size: 12px;-->
+            <!--line-height: 35px;-->
+        <!--}-->
+        <!--.show{-->
+            <!--text-align: center;-->
+            <!--font-size: 14px;-->
+            <!--color: #4A4A4A;-->
+        <!--}-->
+    <!--</style>-->
+</head>
+<style type="text/css">
+    .icon {
+        width: 1.6em; height: 1.5em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+    }
+</style>
+<body>
+
+<!--<div class="container">-->
+<!--<div class="row">-->
+<!--<div class="file-loading">-->
+<!--<input id="file" name="file" type="file" multiple>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<br><br><br>
+<form id="form" method="post" style="display: none;">
+    <input type="file" class="btn btn-primary" name="file" id="file" multiple>
+</form>
+<button id="button">upload</button>
+
+<div class="panel panel-default" id="upload_view" style="width: 633px;height: 422px;position: fixed;right: 30px;bottom:0px;margin-bottom:0px;">
+    <div class="panel-heading" id="upload_view_header">
+        <div style="display: inline-block">上传完成</div>
+        <div style="display:inline-block;float: right">
+            <a href="javascript:;"><svg class="icon" aria-hidden="true"><use id="suoxiao" xlink:href="#icon-suoxiao"></use></svg></a>
+            <a href="javascript:;"><svg class="icon" aria-hidden="true"><use id="cha" xlink:href="#icon-cha"></use></svg></a>
+        </div>
+    </div>
+    <div class="panel-body" style="padding: 0;height:400px;overflow: auto;" id="upload_view_body">
+        <table class="table table-striped" id="upload_table">
+            <tr>
+                <td>文件名</td>
+                <td>大小</td>
+                <td>上传目录</td>
+                <td>状态</td>
+            </tr>
+            <!--<tr>-->
+            <!--<td>-->
+            <!--<div>-->
+            <!--<svg class="icon" aria-hidden="true"><use xlink:href="#icon-tubiao-jpg"></use></svg>-->
+            <!--<span style="display: inline-block;height:20px;vertical-align: top">1.jpg</span>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--<td>10GB</td>-->
+            <!--<td>我的文件</td>-->
+            <!--<td>-->
+            <!--&lt;!&ndash;<svg class="icon" aria-hidden="true" style="width: 1.1em"><use xlink:href="#icon-agree"></use></svg>&ndash;&gt;-->
+            <!--<div class="progress" style="margin-bottom: 0;">-->
+            <!--<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">-->
+            <!--60%-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--</tr>-->
+        </table>
+    </div>
+</div>
+
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="__STATIC__/jquery/jquery-3.4.0.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。 -->
+<script type="text/javascript" src="__STATIC__/bootstrap3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="__STATIC__/res/js/iconfont.js"></script>
+<script type="text/javascript" src="__STATIC__/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script type="text/javascript" src="__STATIC__/bootstrap-fileinput/js/locales/zh.js"></script>
+<script type="text/javascript" src="__STATIC__/bootstrap-fileinput/themes/explorer-fa/theme.js"></script>
+<script type="text/javascript" src="__STATIC__/res/js/fileupload.js"></script>
+<script type="text/javascript" src="__STATIC__/res/js/commom.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#upload_view_header,#suoxiao').on('click', function () {
+            size = document.getElementById('suoxiao');
+            if($('#upload_view_body').css('height') != '0px'){
+                $('#upload_view').animate({height:'40px'});
+                $('#upload_view_body').animate({height:'0px'});
+                size.href.baseVal = '#icon-shouqi';
+            } else{
+                $('#upload_view').animate({height:'422px'});
+                $('#upload_view_body').animate({height:'400px'});
+                size.href.baseVal = '#icon-suoxiao';
+            }
+        });
+
+        $('#cha').parent().on('click',function (e) {
+            e.stopPropagation();//阻止事件冒泡即可
+            $('#upload_view').css('display', 'none');
+        });
+
+        function setProgress(id, num){
+            console.log(1111);
+            // console.log($(id));
+            $('#'+id).css('width',num+'%');
+            $('#'+id).text(num+'%');
+            console.log(2222);
+        }
+
+
+        function getSuffix(name){
+            var sum = name.lastIndexOf(".");
+            var suffix=name.substring(sum+1,name.length);
+            return suffix;
+        }
+
+        function fileUpload(index, formData){
+            $.ajax({
+                type: 'post',
+                url: "{:url('index/home/uploader')}",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                xhr: function () {  //获取上传进度
+                    myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', function (e) {
+                            console.log('--------------------xhr---------------------------');
+                            console.log(e);
+                            var loaded = e.loaded;//已上传
+                            console.log(loaded);
+                            var total = e.total;//总大小
+                            console.log(total);
+                            var percent = Math.floor(100 * loaded / total);
+                            console.log(percent);
+                            console.log(index);
+                            setProgress('upload_'+index,percent);
+                            console.log('--------------------xhr end---------------------------');
+                        });
+                        return myXhr;
+                    }
+                },
+                success: function (data) {
+                    console.log('--------------------success--------------------------');
+                    console.log(data);
+                    console.log('--------------------success end---------------------------');
+                },
+                error: function (data) {
+                    console.log('--------------------error---------------------------');
+                    console.log(data);
+                    console.log('--------------------error end---------------------------');
+                }
+            });
+        }
+
+        $('#button').on('click',function () {
+            $("#file").trigger("click");
+            $('#file').on('change',function () {    //当file的内容发生改变时会触发两次change事件，如果想要只触发一次，就需要重置file
+                $('#upload_view').css('display', '');
+                console.log('*********************');
+                var trNum = $('.tr_upload').length;
+                console.log(trNum);
+                var length = $('#file')[0].files.length;
+                console.log(length);
+                console.log('*********************');
+                for(var index=0 ;index<length;index++){
+                    console.log('-------------------------------------------------');
+                    var file = document.getElementById('file').files[index];
+                    console.log(file);
+                    var name = file.name;
+                    console.log(name);
+                    console.log(getSuffix(name));
+                    var size = file.size;
+                    console.log(SizeFormat(size));
+                    var formData = new FormData();
+                    formData.prepend('file',file);
+                    console.log(formData);
+                    $('#upload_table').prepend('<tr class="tr_upload">\n' +
+                        '                <td>\n' +
+                        '                    <div>\n' +
+                        '                        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-tubiao-'+getSuffix(name)+'"></use></svg>\n' +
+                        '                        <span style="display: inline-block;height:20px;vertical-align: top">'+name+'</span>\n' +
+                        '                    </div>\n' +
+                        '                </td>\n' +
+                        '                <td>'+SizeFormat(size)+'</td>\n' +
+                        '                <td>我的文件</td>\n' +
+                        '                <td>\n' +
+                        '                    <!--<svg class="icon" aria-hidden="true" style="width: 1.1em"><use xlink:href="#icon-agree"></use></svg>-->\n' +
+                        '                    <div class="progress" style="margin-bottom: 0;">\n' +
+                        '                        <div id="upload_'+(index+trNum)+'" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;color: black">\n' +
+                        '                            0%\n' +
+                        '                        </div>\n' +
+                        '                    </div>\n' +
+                        '                </td>\n' +
+                        '            </tr>');
+                    console.log('上传函数');
+                    fileUpload(index+trNum, formData);
+                    console.log('上传函数end');
+                }
+                //重置file组件
+                $('#file').replaceWith('<input type="file" class="btn btn-primary" name="file" id="file" multiple>');
+            });
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+/*文字大小*/
+.f1{font-size:1rem}
+.f2{font-size:2rem}
+.f3{font-size:3rem}
+.f4{font-size:4rem}
+.f5{font-size:5rem}
+.f6{font-size:6rem}
+.f7{font-size:7rem}
+.f8{font-size:8rem}
+.f9{font-size:9rem}
+
+.f12{font-size:12px}
+.f13{font-size:13px}
+.f14{font-size:14px}
+.f16{font-size:16px}
+.f20{font-size:20px}
+.f40{font-size:40px}
+.f50{font-size:50px}
+.f60{font-size:60px}
+.f70{font-size:70px}
+
+.letter-spacing2{letter-spacing: 2rem}
+.letter-spacing3{letter-spacing: 3rem}
+.letter-spacing4{letter-spacing: 4rem}
+.letter-spacing5{letter-spacing: 5rem}
+.letter-spacing6{letter-spacing: 6rem}
+.letter-spacing7{letter-spacing: 7rem}
+
+
+/*文字不可选中*/
+.select{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+/*文字水平对齐方式*/
+.t_align_c{text-align: center}
+.t_align_l{text-align: left}
+.t_align_r{text-align: right}
+
+/*文字垂直对齐方式*/
+.v_align_c{vertical-align: center}
+.v_align_t{vertical-align: top}
+.v_align_b{vertical-align: bottom}
+
+.mg_left_5{margin-left: 5px;}

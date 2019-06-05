@@ -1,0 +1,103 @@
+<!--_header 作为公共模版分离出去-->
+<!-- 页面内容 -->
+<div id="page-content-wrapper">
+    <!--顶端导航栏-->
+    <nav id="topnavbar" class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
+        <!--<button class="btn btn-primary " id="menu-toggle"><span class="icon iconfont" style="font-size: 1.5rem;">&#xe601;</span></button>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <div id="b-upload" class="btn-group ml-2 top-btn" style="display: none">
+                    <button type="button" class="btn btn-primary" id="upload_button"><span class="icon iconfont mr-1" style="">&#xe667;</span>上传文件</button>
+                </div>
+                <div id="b-new" class="btn-group ml-2 top-btn" style="display: none">
+                    <button type="button" class="btn btn-primary" id="create_button" data-toggle="modal" data-target="#create_directory"><span class="icon iconfont mr-1" style="">&#xe7b4;</span>新建文件夹</button>
+                </div>
+
+                <button id="b-note" class="btn btn-primary ml-2 top-btn" type="button" style="display: none"><span class="icon iconfont mr-1" style="">&#xe60d;</span>新建笔记</button>
+                <button id="b-share" class="btn btn-primary ml-2 top-btn" type="button" style="display: none"><span class="icon iconfont mr-1" style="">&#xe619;</span>新建共享组</button>
+                <div id="b-down" class="btn-group ml-2 top-btn" style="display: none">
+                    <button type="button" class="btn bg-white border"><span class="icon iconfont mr-1" style="">&#xe626;</span>下载</button>
+                    <button type="button" class="btn bg-white border"><span class="icon iconfont mr-1" style="">&#xe63d;</span>分享</button>
+                    <button type="button" class="btn bg-white border" data-toggle="modal" data-target="#delete"><span class="icon iconfont mr-1" style="">&#xe604;</span>删除</button>
+                </div>
+            </ul>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <span class="navbar-text mr-3">
+                        交理云—云你所想
+                    </span>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {$Think.session.user_info['real_name']}<span class="icon iconfont mr-1" style="">&#xe62a;</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="width: 280px">
+                        <div class="bg-gray dropdown-item disabled" style="height: 80px">
+                            <div class="float-left" style="width: 74px">
+                                <img src="{$Think.session.user_info['picture']}" class="img-thumbnail" style="width: 64px;height: 64px">
+                            </div>
+                            <div class="">
+                                <h4>{$Think.session.user_info['real_name']}</h4>
+                                <p>是否为会员</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="http://cloud2.test/modify" id="{$Think.session.user_info['user_id']}"><span class="icon iconfont" style="">&#xe609;</span>个人信息修改</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" id="menu-toggle"><span class="icon iconfont" style="">&#xe602;</span>隐藏导航栏</a>
+                        <a class="dropdown-item" href="http://cloud2.test/logout"><span class="icon iconfont" style="">&#xe616;</span>注销</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- 新建文件夹 模态框 -->
+    <div class="modal fade" id="create_directory">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h6 class="modal-title">请输入文件夹名称</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Please enter the folder name" maxlength="25">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-primary" disabled>新建</button>
+                        </div>
+                        <div class="invalid-feedback">目录名称重复</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认删除 模态框 -->
+    <div class="modal fade" id="delete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h5 class="modal-title">删除文件</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    确定删除选中文件（夹）吗？
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="delete_button">确定</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!--/_header 作为公共模版分离出去-->

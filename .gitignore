@@ -1,4 +1,12 @@
 .idea
 composer.lock
 *.log
-thinkphp
+# thinkphp
+
+# 忽略windows自动生成的文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 忽略上传文件的目录
+/public/uploads/
