@@ -886,9 +886,9 @@ $(document).ready(function() {
     }
 
 
-    // $('#b-down button:eq(1)').on('click',function () {
-    //     alert('分享');
-    // });
+    $('#b-down button:eq(1)').on('click',function () {
+        layer.msg("该功能暂未开放！");
+    });
 
     /**
      * 点击删除按钮删除目录或文件

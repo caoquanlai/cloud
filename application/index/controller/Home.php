@@ -365,7 +365,7 @@ class Home extends Base
         return $this->fetch();
     }
     public function recent(){
-
+        return $this->fetch();
     }
 
     public function upload(){

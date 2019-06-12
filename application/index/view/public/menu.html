@@ -7,9 +7,9 @@
         </div>
         <div class="list-group list-group-flush list-nav">
             <form class="form-inline">
-                <input class="form-control mx-auto mb-1" style="width: 80%" type="text" placeholder="搜索全部">
+                <input class="form-control mx-auto mb-1" disabled="disabled" style="width: 80%" type="text" placeholder="搜索全部">
             </form>
-            <a href="#" id="p-lately" class="list-group-item list-group-item-action bg-light border-0 pl-4.5"><span class="icon iconfont color-gray mr-2">&#xe680;</span>最近</a>
+            <a href="http://cloud2.test/home/recent" id="p-lately" class="list-group-item list-group-item-action bg-light border-0 pl-4.5"><span class="icon iconfont color-gray mr-2">&#xe680;</span>最近</a>
             <div class="dropdown-divider ml-3 mr-3"></div>
             <a href="http://cloud2.test/home" id="p-whole" class="list-group-item list-group-item-action bg-light border-0 pl-4.5"><span class="icon iconfont color-gray mr-2">&#xe6d6;</span>全部</a>
             <a href="http://cloud2.test/home/doc" id="p-file" class="list-group-item list-group-item-action bg-light border-0 pl-4.5"><span class="icon iconfont color-gray mr-2">&#xe601;</span>文档</a>
@@ -22,7 +22,7 @@
             <a href="http://cloud2.test/home/safebox" id="p-insurance" class="list-group-item list-group-item-action bg-light border-0 pl-4.5"><span class="icon iconfont color-gray mr-2">&#xe60f;</span>保险箱</a>
             <a href="http://cloud2.test/home/share" id="p-link" class="list-group-item list-group-item-action bg-light border-0 pl-4.5"><span class="icon iconfont color-gray mr-2">&#xe63d;</span>分享链接</a>
             <a href="http://cloud2.test/home/recycle" id="p-recovery" class="list-group-item list-group-item-action bg-light border-0 pl-4.5"><span class="icon iconfont color-gray mr-2">&#xe604;</span>回收站</a>
-            <a href="http://cloud2.test/home/recent" id="p-capacity" class="list-group-item list-group-item-action bg-light border-0 mt-4" style="position: absolute;bottom: 10px;"><span style="font-size: 12px">已用<span>{$useSpaceFormat|default='2GB'}</span>/10.0GB</span><span class="float-right" style="font-size: 12px;">扩容</span>
+            <a href="javascript: ;" id="p-capacity" class="list-group-item list-group-item-action bg-light border-0 mt-4" style="position: absolute;bottom: 10px;"><span style="font-size: 12px">已用<span>{$useSpaceFormat|default='2GB'}</span>/10.0GB</span><span class="float-right" style="font-size: 12px;">扩容</span>
                 <div class="progress" style="height: 2px">
                     <div class="progress-bar" style="width:20%;"></div>
                 </div>
